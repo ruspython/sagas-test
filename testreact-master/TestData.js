@@ -3,7 +3,7 @@ import Questionnaire from "./Models/Questionnaire";
 import Remark from "./Models/Remark";
 import Section from "./Models/Section";
 
-var GetTestData = function () {
+export default function GetTestData() {
   var tiQuestionSequence = 1;
 
   var toSectionPrivateMain = new Section({sMainSection:"Private", sSubSection:"Main", iSequence:100});
@@ -188,4 +188,5 @@ var GetTestData = function () {
     oQuestionnaire:toQuestionnaire,
     oSection:toSectionHolidayDream
   }));
+  return toQuestionnaire
 };

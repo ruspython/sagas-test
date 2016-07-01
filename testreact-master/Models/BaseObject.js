@@ -1,4 +1,4 @@
-class BaseObject extends BaseObject {
+export default class BaseObject {
   constructor(ioSource = {}) {
     this.sId = (ioSource.sId || this.GetUniqueId());
   }
