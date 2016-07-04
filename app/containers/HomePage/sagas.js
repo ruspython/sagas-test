@@ -4,8 +4,8 @@
 
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { LOAD_QUESTIONS } from 'containers/App/constants';
-import { questionsLoaded, questionsLoadingError } from 'containers/App/actions';
+import { LOAD_QUESTIONS, ADD_QUESTIONNAIRE } from 'containers/App/constants';
+import { questionsLoaded, questionsLoadingError, addQuestionnaireSuccess } from 'containers/App/actions';
 import { takeEvery, delay } from 'redux-saga'
 import request from 'utils/request';
 import { selectUsername } from 'containers/HomePage/selectors';
@@ -40,6 +40,12 @@ function parseQuestionnaire(questions) {
   return questionnaires;
 }
 
+export function* addQuestionnaire() {
+  var data = parseQuestionnaire(GetTestData().oQuestionList);
+  yield delay(1000);
+  yield put(addQuestionnaireSuccess(data[0]));
+}
+
 export function* getQuestions() {
   var data = parseQuestionnaire(GetTestData().oQuestionList);
   yield delay(1000);
@@ -61,7 +67,14 @@ export function* questionsData() {
   yield cancel(watcher);
 }
 
+export function* watchAddQuestionnaire() {
+  while (yield take(ADD_QUESTIONNAIRE)) {
+    yield call(addQuestionnaire);
+  }
+}
+
 // Bootstrap sagas
 export default [
   questionsData,
+  watchAddQuestionnaire
 ];

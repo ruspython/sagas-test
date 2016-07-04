@@ -1,9 +1,3 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- */
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
@@ -21,7 +15,7 @@ import {
 } from './selectors';
 
 import { changeUsername } from './actions';
-import { loadQuestions } from '../App/actions';
+import { loadQuestions, addQuestionnaire } from '../App/actions';
 
 import RepoListItem from 'containers/RepoListItem';
 import Button from 'components/Button';
@@ -82,6 +76,7 @@ export class HomePage extends React.Component {
           <section className={styles.textSection}>
             {mainContent}
           </section>
+          <button onClick={this.props.addQuestionnaire}>Add new</button>
         </div>
       </article>
     );
@@ -109,6 +104,9 @@ function mapDispatchToProps(dispatch) {
     changeRoute: (url) => dispatch(push(url)),
     onPageLoad: () => {
       dispatch(loadQuestions());
+    },
+    addQuestionnaire: () => {
+      dispatch(addQuestionnaire())
     },
 
     dispatch,
