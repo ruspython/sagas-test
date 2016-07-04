@@ -12,10 +12,10 @@ export function loadQuestions() {
   };
 }
 
-export function questionsLoaded(data) {
+export function questionsLoaded(questionnaires) {
   return {
     type: LOAD_QUESTIONS_SUCCESS,
-    questions: data.oQuestionList,
+    questionnaires: questionnaires,
   };
 }
 

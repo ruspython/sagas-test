@@ -21,9 +21,9 @@ const selectError = () => createSelector(
   (globalState) => globalState.get('error')
 );
 
-const selectQuestions = () => createSelector(
+const selectQuestionnaires = () => createSelector(
   selectGlobal(),
-  (globalState) => globalState.get('questions')
+  (globalState) => globalState.get('questionnaires')
 );
 
 const selectLocationState = () => {
@@ -47,6 +47,6 @@ export {
   selectCurrentUser,
   selectLoading,
   selectError,
-  selectQuestions,
+  selectQuestionnaires,
   selectLocationState,
 };

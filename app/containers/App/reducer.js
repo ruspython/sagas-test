@@ -22,7 +22,7 @@ const initialState = fromJS({
   loading: false,
   error: false,
   currentUser: false,
-  questions: [],
+  questionnaires: [],
 });
 
 function appReducer(state = initialState, action) {
@@ -31,11 +31,10 @@ function appReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn(['userData', 'repositories'], false);
+        .setIn('questionnaires', false);
     case LOAD_QUESTIONS_SUCCESS:
-      debugger
       return state
-        .set('questions', action.questions)
+        .set('questionnaires', action.questionnaires)
         .set('loading', false);
     case LOAD_QUESTIONS_ERROR:
       return state

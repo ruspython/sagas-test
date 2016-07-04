@@ -11,7 +11,7 @@ import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 
 import {
-  selectQuestions,
+  selectQuestionnaires,
   selectLoading,
   selectError,
 } from 'containers/App/selectors';
@@ -45,17 +45,26 @@ export class HomePage extends React.Component {
       mainContent = (<List component={LoadingIndicator}/>);
 
     }
-    debugger;
-    if (this.props.questions) {
+
+    if (this.props.questionnaires) {
       mainContent = (
         <div>
           <table>
-            {this.props.questions.map(function (item) {
+            <thead>
+              <th>Customer</th>
+              <th>Section count</th>
+              <th>Sub-section count</th>
+              <th>Question count</th>
+              <th>Remark count</th>
+              <th>ToDo count</th>
+            </thead>
+            {this.props.questionnaires.map(function (item, index) {
                 return (
                   <tr>
-                    <td>{item.sQuestion}</td>
-                    <td>{item.oSection.sMainSection}</td>
-                    <td>{item.oSection.sSubSection}</td>
+                    <td>Customer {index}</td>
+                    <td>{item.sections.length}</td>
+                    <td>{item.subsections.length}</td>
+                    <td>{item.questions.length}</td>
                     <td></td>
                     <td></td>
                   </tr>
@@ -70,13 +79,7 @@ export class HomePage extends React.Component {
     return (
       <article>
         <div>
-          <section className={`${styles.textSection} ${styles.centered}`}>
-            <H2>Start your next react project in seconds</H2>
-            <p>A highly scalable, offline-first foundation with the best DX and a focus on performance and best
-              practices</p>
-          </section>
           <section className={styles.textSection}>
-            <H2>Try me!</H2>
             {mainContent}
           </section>
         </div>
@@ -113,7 +116,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  questions: selectQuestions(),
+  questionnaires: selectQuestionnaires(),
   loading: selectLoading(),
   error: selectError(),
 });
