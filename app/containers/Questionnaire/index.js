@@ -28,9 +28,34 @@ export class Questionnaire extends React.Component {
   }
 
   render() {
+    const {questionnaire} = this.props;
+
     return (
       <article>
-        Details page
+        {questionnaire ?
+          <table>
+            <tr>
+              <td>Questionnaire list</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                This questionnaire has {questionnaire.questions.length} questions. <br/>
+                The questions are spread over {questionnaire.sections.length} sections
+                and {questionnaire.subsections.length} sub sections.
+              </td>
+              <td></td>
+            </tr>
+            { questionnaire.sections.map(function (section) {
+              return <tr>
+                <td><Link to="/">{section.name}</Link></td>
+                <td></td>
+              </tr>
+            }) }
+
+          </table>
+          : null
+        }
       </article>
     );
   }
