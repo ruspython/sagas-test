@@ -39,6 +39,27 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/q/:id',
+      name: 'questionnaire',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/Questionnaire/reducer'),
+          System.import('containers/Questionnaire/sagas'),
+          System.import('containers/Questionnaire'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('questionnaire', reducer.default);
+          injectSagas(sagas.default);
+
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

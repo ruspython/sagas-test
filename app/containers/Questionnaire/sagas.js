@@ -1,16 +1,13 @@
-/**
- * Gets the repositories of the user from Github
- */
-
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { LOAD_QUESTIONS, ADD_QUESTIONNAIRE } from 'containers/App/constants';
-import { questionsLoaded, questionsLoadingError, addQuestionnaireSuccess } from 'containers/App/actions';
+import { LOAD_QUESTIONNAIRE } from 'containers/Questionnaire/constants';
+import { questionnaireLoaded } from 'containers/Questionnaire/actions';
 import { takeEvery, delay } from 'redux-saga'
 import request from 'utils/request';
 import { selectUsername } from 'containers/HomePage/selectors';
 import GetTestData from '../../../testreact-master/TestData';
 import _ from 'lodash';
+
 
 export function parseQuestionnaire(questions) {
   var questionnaires = [],
@@ -40,41 +37,21 @@ export function parseQuestionnaire(questions) {
   return questionnaires;
 }
 
-export function* addQuestionnaire() {
+export function* loadQuestionnaire() {
   var data = parseQuestionnaire(GetTestData().oQuestionList);
   yield delay(1000);
-  yield put(addQuestionnaireSuccess(data[0]));
+  yield put(questionnaireLoaded(data[0]));
 }
 
-export function* getQuestions() {
-  var data = parseQuestionnaire(GetTestData().oQuestionList);
-  yield delay(1000);
-  yield put(questionsLoaded(data));
-}
 
-export function* getQuestionsWatcher() {
-  while (yield take(LOAD_QUESTIONS)) {
-    yield call(getQuestions);
-  }
-}
 
-export function* questionsData() {
-  // Fork watcher so we can continue execution
-  const watcher = yield fork(getQuestionsWatcher);
-
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
-export function* watchAddQuestionnaire() {
-  while (yield take(ADD_QUESTIONNAIRE)) {
-    yield call(addQuestionnaire);
+export function* loadQuestionnaireWatcher() {
+  while (yield take(LOAD_QUESTIONNAIRE)) {
+    yield call(loadQuestionnaire);
   }
 }
 
 // Bootstrap sagas
 export default [
-  questionsData,
-  watchAddQuestionnaire
+  loadQuestionnaireWatcher
 ];

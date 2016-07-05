@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
@@ -17,7 +18,6 @@ import {
 import { changeUsername } from './actions';
 import { loadQuestions, addQuestionnaire } from '../App/actions';
 
-import RepoListItem from 'containers/RepoListItem';
 import Button from 'components/Button';
 import H2 from 'components/H2';
 import List from 'components/List';
@@ -45,25 +45,24 @@ export class HomePage extends React.Component {
         <div>
           <table>
             <thead>
-              <th>Customer</th>
-              <th>Section count</th>
-              <th>Sub-section count</th>
-              <th>Question count</th>
-              <th>Remark count</th>
-              <th>ToDo count</th>
+            <th>Customer</th>
+            <th>Section count</th>
+            <th>Sub-section count</th>
+            <th>Question count</th>
+            <th>Remark count</th>
+            <th>ToDo count</th>
             </thead>
             {this.props.questionnaires.map(function (item, index) {
-                return (
-                  <tr>
-                    <td>Customer {index}</td>
-                    <td>{item.sections.length}</td>
-                    <td>{item.subsections.length}</td>
-                    <td>{item.questions.length}</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                )
-
+              return (
+                <tr>
+                  <td><Link to={`/q/${index}`}>Customer {index}</Link></td>
+                  <td>{item.sections.length}</td>
+                  <td>{item.subsections.length}</td>
+                  <td>{item.questions.length}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              )
             })}
           </table>
         </div>

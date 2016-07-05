@@ -17,6 +17,9 @@ import {
   ADD_QUESTIONNAIRE_SUCCESS,
   ADD_QUESTIONNAIRE,
   ADD_QUESTIONNAIRE_ERROR,
+  LOAD_QUESTIONNAIRE,
+  LOAD_QUESTIONNAIRE_SUCCESS,
+  LOAD_QUESTIONNAIRE_ERROR,
 } from './constants';
 import { fromJS } from 'immutable';
 
@@ -26,6 +29,7 @@ const initialState = fromJS({
   error: false,
   currentUser: false,
   questionnaires: [],
+  questionnaire: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -53,6 +57,19 @@ function appReducer(state = initialState, action) {
         .set('questionnaires', state.get('questionnaires'))
         .set('loading', false);
     case ADD_QUESTIONNAIRE_ERROR:
+      return state
+        .set('error', action.error)
+        .set('loading', false);
+    case LOAD_QUESTIONNAIRE:
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .set('questionnaire', null);
+    case LOAD_QUESTIONNAIRE_SUCCESS:
+      return state
+        .set('questionnaire', action.questionnaire)
+        .set('loading', false);
+    case LOAD_QUESTIONNAIRE_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false);
