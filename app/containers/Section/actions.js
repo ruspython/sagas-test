@@ -1,12 +1,26 @@
 import {
   LOAD_SECTION,
-  LOAD_SECTION_SUCCESS
+  LOAD_SECTION_SUCCESS,
+  OPEN_NEXT_SUBSECTION,
+  OPEN_PREV_SUBSECTION
 } from './constants';
 
 
 export function loadSection() {
   return {
     type: LOAD_SECTION
+  };
+}
+
+export function openNextSubsection() {
+  return {
+    type: OPEN_NEXT_SUBSECTION
+  };
+}
+
+export function openPrevSubsection() {
+  return {
+    type: OPEN_PREV_SUBSECTION
   };
 }
 

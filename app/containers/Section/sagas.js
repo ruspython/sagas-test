@@ -51,8 +51,6 @@ export function* loadSection() {
   yield put(sectionLoaded(section));
 }
 
-
-
 export function* loadSectionWatcher() {
   while (yield take(LOAD_SECTION)) {
     yield call(loadSection);

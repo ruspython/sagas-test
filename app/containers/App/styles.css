@@ -61,6 +61,12 @@ table td {
   padding: .625em;
   text-align: center;
 }
+table td button {
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 4px 20px;
+  cursor: pointer;
+}
 table th {
   font-size: .85em;
   letter-spacing: .1em;

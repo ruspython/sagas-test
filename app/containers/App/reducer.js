@@ -77,19 +77,6 @@ function appReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
-    case LOAD_SECTION:
-      return state
-        .set('loading', true)
-        .set('error', false)
-        .set('section', null);
-    case LOAD_SECTION_SUCCESS:
-      return state
-        .set('section', action.section)
-        .set('loading', false);
-    case LOAD_SECTION_ERROR:
-      return state
-        .set('error', action.error)
-        .set('loading', false);
     default:
       return state;
   }

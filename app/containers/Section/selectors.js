@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectGlobal = () => (state) => state.get('global');
+const selectGlobal = () => (state) => state.get('section');
 
 
 const selectLoading = () => createSelector(
@@ -16,6 +16,11 @@ const selectError = () => createSelector(
 const selectSection = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.get('section')
+);
+
+const selectCurrentSubsectionIndex = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('currentSubsectionIndex')
 );
 
 const selectLocationState = () => {
@@ -40,4 +45,5 @@ export {
   selectError,
   selectSection,
   selectLocationState,
+  selectCurrentSubsectionIndex,
 };
