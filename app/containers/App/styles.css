@@ -100,3 +100,8 @@ table td img {
     border-bottom: 0;
   }
 }
+
+textarea {
+  background-color: white !important;
+  width: 100% !important;
+}

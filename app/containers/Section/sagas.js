@@ -6,8 +6,11 @@ import request from 'utils/request';
 import { selectUsername } from 'containers/HomePage/selectors';
 import GetTestData from '../../../testreact-master/TestData';
 import _ from 'lodash';
+import {
+  selectSectionName,
+} from 'containers/Section/selectors';
 
-
+//TODO: move to utils
 export function parseQuestionnaire(questions) {
   var questionnaires = [],
     sections = [],
@@ -23,6 +26,7 @@ export function parseQuestionnaire(questions) {
 
     if (!_.find(subsections, {name: item.oSection.sSubSection})) {
       subsection.name = item.oSection.sSubSection;
+      subsection.sectionName = item.oSection.sMainSection;
       subsection.questions = [];
       subsection.questions.push(item);
       subsections.push(subsection);
@@ -37,9 +41,14 @@ export function parseQuestionnaire(questions) {
 }
 
 export function* loadSection() {
-  var data = parseQuestionnaire(GetTestData().oQuestionList);
-  yield delay(1000);
-  yield put(sectionLoaded(data[0]));
+  var data = parseQuestionnaire(GetTestData().oQuestionList),
+    section = {};
+  //TODO: replace with props
+  var sectionName = window.location.pathname.split('/').slice(-1)[0];
+  yield delay(500);
+  section.subsections = _.filter(data[0].subsections, {'sectionName': sectionName});
+  section.name = sectionName;
+  yield put(sectionLoaded(section));
 }
 
 

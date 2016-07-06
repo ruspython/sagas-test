@@ -81,10 +81,10 @@ function appReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn('section', null);
+        .set('section', null);
     case LOAD_SECTION_SUCCESS:
       return state
-        .setIn('section', action.section)
+        .set('section', action.section)
         .set('loading', false);
     case LOAD_SECTION_ERROR:
       return state

@@ -18,10 +18,21 @@ export class Section extends React.Component {
   }
 
   render() {
-debugger;
     return (
       <article>
-        I'm a section {this.props.section && this.props.section.name}
+        {this.props.section && this.props.section.subsections.map(function (subsection) {
+          return <table>
+            <caption>{subsection.name}</caption>
+            {subsection.questions.map(function (q) {
+              return <tr>
+                <td>
+                  <div>{q.sQuestion}</div>
+                  <textarea name="" id="" rows="4"></textarea>
+                </td>
+              </tr>
+            })}
+          </table>
+        })}
       </article>
     );
   }

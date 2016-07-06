@@ -46,9 +46,9 @@ export class Questionnaire extends React.Component {
               </td>
               <td></td>
             </tr>
-            { questionnaire.sections.map(function (section, index) {
+            { questionnaire.sections.map(function (section) {
               return <tr>
-                <td><Link to={`/q/1/sections/${index}`}>{section.name}</Link></td>
+                <td><Link to={`/q/1/sections/${section.name}`}>{section.name}</Link></td>
                 <td></td>
               </tr>
             }) }
