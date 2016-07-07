@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import {IntlProvider, FormattedNumber, FormattedMessage, FormattedPlural} from 'react-intl';
 
 import { createStructuredSelector } from 'reselect';
 
@@ -25,6 +26,18 @@ import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 
 import styles from './styles.css';
+import {intlShape, injectIntl, defineMessages} from 'react-intl';
+
+const messages = defineMessages({
+  customer: {
+    id: 'tableHeader.customer',
+    defaultMessage: 'Customer',
+  },
+  sectionCount: {
+    id: 'tableHeader.sectionCount',
+    defaultMessage: 'Section count',
+  },
+});
 
 export class HomePage extends React.Component {
   componentDidMount() {
@@ -32,6 +45,7 @@ export class HomePage extends React.Component {
   }
 
   render() {
+    const {formatMessage} = this.props.intl;
     let mainContent = null;
 
     // Show a loading indicator when we're loading
@@ -45,12 +59,36 @@ export class HomePage extends React.Component {
         <div>
           <table>
             <thead>
-            <th>Customer</th>
-            <th>Section count</th>
-            <th>Sub-section count</th>
-            <th>Question count</th>
-            <th>Remark count</th>
-            <th>ToDo count</th>
+            <th>
+              <FormattedMessage
+                id="app.customer"
+                defaultMessage=""/>
+            </th>
+            <th>
+              <FormattedMessage
+                id="app.sectionCount"
+                defaultMessage=""/>
+            </th>
+            <th>
+              <FormattedMessage
+                id="app.subSectionCount"
+                defaultMessage=""/>
+            </th>
+            <th>
+              <FormattedMessage
+                id="app.questionCount"
+                defaultMessage=""/>
+            </th>
+            <th>
+              <FormattedMessage
+                id="app.remarkCount"
+                defaultMessage=""/>
+            </th>
+            <th>
+              <FormattedMessage
+                id="app.todoCount"
+                defaultMessage=""/>
+            </th>
             </thead>
             {this.props.questionnaires.map(function (item, index) {
               return (
@@ -118,5 +156,9 @@ const mapStateToProps = createStructuredSelector({
   error: selectError(),
 });
 
+HomePage.propTypes = {
+  intl: intlShape.isRequired,
+};
+
 // Wrap the component to inject dispatch and state into it
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HomePage));
