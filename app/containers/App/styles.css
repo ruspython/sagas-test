@@ -39,69 +39,81 @@ body.fontLoaded {
   display: block;
 }
 
-
 table {
-  border: 1px solid #ccc;
+  border: 1px solid #CCC;
   border-collapse: collapse;
   margin: 0;
   padding: 0;
   width: 100%;
 }
+
 table caption {
   font-size: 1.5em;
-  margin: .25em 0 .75em;
+  margin: 0.25em 0 0.75em;
 }
+
 table tr {
-  background: #f8f8f8;
-  border: 1px solid #ddd;
-  padding: .35em;
+  background: #F8F8F8;
+  border: 1px solid #DDD;
+  padding: 0.35em;
 }
+
 table th,
 table td {
-  padding: .625em;
+  padding: 0.625em;
   text-align: center;
 }
+
 table td button {
   border: 1px solid black;
   border-radius: 3px;
   padding: 4px 20px;
   cursor: pointer;
 }
+
 table th {
-  font-size: .85em;
-  letter-spacing: .1em;
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+
 table td img {
   text-align: center;
 }
+
 @media screen and (max-width: 600px) {
   table {
     border: 0;
   }
+
   table caption {
     font-size: 1.3em;
   }
+
   table thead {
     display: none;
   }
+
   table tr {
-    border-bottom: 3px solid #ddd;
+    border-bottom: 3px solid #DDD;
     display: block;
-    margin-bottom: .625em;
+    margin-bottom: 0.625em;
   }
+
   table td {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #DDD;
     display: block;
-    font-size: .8em;
+    font-size: 0.8em;
     text-align: right;
   }
-  table td:before {
+
+  table td::before {
     content: attr(data-label);
     float: left;
     font-weight: bold;
     text-transform: uppercase;
   }
+
   table td:last-child {
     border-bottom: 0;
   }
