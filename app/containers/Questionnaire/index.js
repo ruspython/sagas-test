@@ -28,7 +28,7 @@ export class Questionnaire extends React.Component {
   }
 
   render() {
-    const {questionnaire} = this.props;
+    const {questionnaire, params} = this.props;
 
     return (
       <article>
@@ -49,7 +49,7 @@ export class Questionnaire extends React.Component {
             </tr>
             { questionnaire.sections.map(function (section) {
               return <tr>
-                <td><Link to={`/q/1/sections/${section.name}`}>{section.name}</Link></td>
+                <td><Link to={`/q/${params.id}/sections/${section.name}`}>{section.name}</Link></td>
                 <td></td>
               </tr>
             }) }
