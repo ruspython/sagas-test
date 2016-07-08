@@ -32,6 +32,7 @@ export class Questionnaire extends React.Component {
 
     return (
       <article>
+        <Link to="/">Up</Link>
         {questionnaire ?
           <table>
             <tr>

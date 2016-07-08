@@ -27,11 +27,12 @@ export class Section extends React.Component {
   }
 
   render() {
-    const {section, currentSubsectionIndex} = this.props;
+    const {section, currentSubsectionIndex, params} = this.props;
     var currentSubsection = section && section.subsections[currentSubsectionIndex];
 
     return (
       <article>
+        <Link to={`/q/${params.id}`}>Up</Link>
         {currentSubsection &&
         <table>
           <caption>{currentSubsection.name}</caption>
@@ -39,7 +40,7 @@ export class Section extends React.Component {
             return <tr>
               <td>
                 <div>{q.sQuestion}</div>
-                <textarea name="" id="" rows="4"></textarea>
+                <textarea defaultValue="" rows="4"/>
               </td>
             </tr>
           })}

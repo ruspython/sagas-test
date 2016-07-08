@@ -21,18 +21,18 @@ export function parseQuestionnaire(questions) {
       subsection = {};
     if (!_.find(sections, {name: item.oSection.sMainSection})) {
       section.name = item.oSection.sMainSection;
-      sections.push(section);
+      sections.push({...section});
     }
 
     if (!_.find(subsections, {name: item.oSection.sSubSection})) {
       subsection.name = item.oSection.sSubSection;
       subsection.sectionName = item.oSection.sMainSection;
       subsection.questions = [];
-      subsection.questions.push(item);
+      subsection.questions.push({...item});
       subsections.push(subsection);
     } else {
       subsection = _.find(subsections, {name: item.oSection.sSubSection});
-      subsection.questions.push(item);
+      subsection.questions.push({...item});
     }
 
   });
