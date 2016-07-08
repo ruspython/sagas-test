@@ -4,7 +4,7 @@ import { sectionLoaded } from 'containers/Section/actions';
 import { takeEvery, delay } from 'redux-saga'
 import request from 'utils/request';
 import { selectUsername } from 'containers/HomePage/selectors';
-import GetTestData from '../../../testreact-master/TestData';
+import GetTestData from './../../../testreact-master/TestData';
 import _ from 'lodash';
 import {
   selectSectionName,
