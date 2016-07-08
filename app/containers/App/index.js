@@ -19,7 +19,11 @@ import styles from './styles.css';
 addLocaleData([...en, ...de]);
 
 var locale = navigator.language || 'de';
+if (locale !== 'de' || locale !== 'en-US') {
+  locale = 'de';
+}
 var messages = require('./../../intl/' + locale).default.messages;
+
 
 function App(props) {
   return (
