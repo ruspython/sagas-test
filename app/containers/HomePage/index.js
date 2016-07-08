@@ -1,8 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import {IntlProvider, FormattedNumber, FormattedMessage, FormattedPlural} from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl, defineMessages } from 'react-intl';
 
 import { createStructuredSelector } from 'reselect';
 
@@ -12,32 +12,9 @@ import {
   selectError,
 } from 'containers/App/selectors';
 
-import {
-  selectUsername,
-} from './selectors';
-
-import { changeUsername } from './actions';
 import { loadQuestions, addQuestionnaire } from '../App/actions';
 
-import Button from 'components/Button';
-import H2 from 'components/H2';
-import List from 'components/List';
-import ListItem from 'components/ListItem';
-import LoadingIndicator from 'components/LoadingIndicator';
-
 import styles from './styles.css';
-import {intlShape, injectIntl, defineMessages} from 'react-intl';
-
-const messages = defineMessages({
-  customer: {
-    id: 'tableHeader.customer',
-    defaultMessage: 'Customer',
-  },
-  sectionCount: {
-    id: 'tableHeader.sectionCount',
-    defaultMessage: 'Section count',
-  },
-});
 
 export class HomePage extends React.Component {
   componentDidMount() {
@@ -45,14 +22,7 @@ export class HomePage extends React.Component {
   }
 
   render() {
-    const {formatMessage} = this.props.intl;
     let mainContent = null;
-
-    // Show a loading indicator when we're loading
-    if (this.props.loading) {
-      mainContent = (<List component={LoadingIndicator}/>);
-
-    }
 
     if (this.props.questionnaires) {
       mainContent = (
@@ -62,32 +32,38 @@ export class HomePage extends React.Component {
             <th>
               <FormattedMessage
                 id="app.customer"
-                defaultMessage=""/>
+                defaultMessage=""
+              />
             </th>
             <th>
               <FormattedMessage
                 id="app.sectionCount"
-                defaultMessage=""/>
+                defaultMessage=""
+              />
             </th>
             <th>
               <FormattedMessage
                 id="app.subSectionCount"
-                defaultMessage=""/>
+                defaultMessage=""
+              />
             </th>
             <th>
               <FormattedMessage
                 id="app.questionCount"
-                defaultMessage=""/>
+                defaultMessage=""
+              />
             </th>
             <th>
               <FormattedMessage
                 id="app.remarkCount"
-                defaultMessage=""/>
+                defaultMessage=""
+              />
             </th>
             <th>
               <FormattedMessage
                 id="app.todoCount"
-                defaultMessage=""/>
+                defaultMessage=""
+              />
             </th>
             </thead>
             {this.props.questionnaires.map(function (item, index) {
@@ -132,6 +108,7 @@ HomePage.propTypes = {
     React.PropTypes.bool,
   ]),
   onPageLoad: React.PropTypes.func,
+  addQuestionnaire: React.PropTypes.func,
   username: React.PropTypes.string,
   onChangeUsername: React.PropTypes.func,
 };

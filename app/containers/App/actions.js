@@ -18,7 +18,7 @@ export function loadQuestions() {
 export function questionsLoaded(questionnaires) {
   return {
     type: LOAD_QUESTIONS_SUCCESS,
-    questionnaires: questionnaires,
+    questionnaires,
   };
 }
 
@@ -38,7 +38,7 @@ export function addQuestionnaire() {
 export function addQuestionnaireSuccess(questionnaire) {
   return {
     type: ADD_QUESTIONNAIRE_SUCCESS,
-    questionnaire: questionnaire,
+    questionnaire,
   };
 }
 
