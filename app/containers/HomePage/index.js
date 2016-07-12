@@ -28,47 +28,48 @@ export class HomePage extends React.Component {
       mainContent = (
         <div>
           <table>
-            <thead>
-            <th>
-              <FormattedMessage
-                id="app.customer"
-                defaultMessage=""
-              />
-            </th>
-            <th>
-              <FormattedMessage
-                id="app.sectionCount"
-                defaultMessage=""
-              />
-            </th>
-            <th>
-              <FormattedMessage
-                id="app.subSectionCount"
-                defaultMessage=""
-              />
-            </th>
-            <th>
-              <FormattedMessage
-                id="app.questionCount"
-                defaultMessage=""
-              />
-            </th>
-            <th>
-              <FormattedMessage
-                id="app.remarkCount"
-                defaultMessage=""
-              />
-            </th>
-            <th>
-              <FormattedMessage
-                id="app.todoCount"
-                defaultMessage=""
-              />
-            </th>
-            </thead>
+            <tbody>
+            <tr>
+              <td>
+                <FormattedMessage
+                  id="app.customer"
+                  defaultMessage=""
+                />
+              </td>
+              <td>
+                <FormattedMessage
+                  id="app.sectionCount"
+                  defaultMessage=""
+                />
+              </td>
+              <td>
+                <FormattedMessage
+                  id="app.subSectionCount"
+                  defaultMessage=""
+                />
+              </td>
+              <td>
+                <FormattedMessage
+                  id="app.questionCount"
+                  defaultMessage=""
+                />
+              </td>
+              <td>
+                <FormattedMessage
+                  id="app.remarkCount"
+                  defaultMessage=""
+                />
+              </td>
+              <td>
+                <FormattedMessage
+                  id="app.todoCount"
+                  defaultMessage=""
+                />
+              </td>
+            </tr>
             {this.props.questionnaires.map(function (item, index) {
               return (
-                <tr>
+                <tr key={index}>
                   <td><Link to={`/q/${index}`}>Customer {index}</Link></td>
                   <td>{item.sections.length}</td>
                   <td>{item.subsections.length}</td>
@@ -78,6 +79,7 @@ export class HomePage extends React.Component {
                 </tr>
               )
             })}
+            </tbody>
           </table>
         </div>
       );

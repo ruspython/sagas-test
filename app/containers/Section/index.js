@@ -36,20 +36,22 @@ export class Section extends React.Component {
         {currentSubsection &&
         <table>
           <caption>{currentSubsection.name}</caption>
-          {currentSubsection.questions.map(function (q) {
-            return <tr>
+          <tbody>
+            {currentSubsection.questions.map(function (q, index) {
+              return <tr key={index}>
+                <td>
+                  <div>{q.sQuestion}</div>
+                  <textarea rows="4"></textarea>
+                </td>
+              </tr>
+            })}
+            <tr>
               <td>
-                <div>{q.sQuestion}</div>
-                <textarea defaultValue="" rows="4"/>
+                <button onClick={this.saveAndPrev.bind(this)}>&larr; Prev</button>
+                <button onClick={this.saveAndNext.bind(this)}>Next &rarr;</button>
               </td>
             </tr>
-          })}
-          <tr>
-            <td>
-              <button onClick={this.saveAndPrev.bind(this)}>&larr; Prev</button>
-              <button onClick={this.saveAndNext.bind(this)}>Next &rarr;</button>
-            </td>
-          </tr>
+          </tbody>
         </table>
         }
       </article>
