@@ -17,11 +17,14 @@ export function parseQuestionnaire(questions) {
     subsections = [];
   questions.forEach(function (item) {
     var
-      section = {},
+      section = {questionsLength: 0, answeredLength: 0},
       subsection = {};
+
+    item.answer = ['answer', 'not an answer', ''][parseInt(Math.random() * 3)];
     if (!_.find(sections, {name: item.oSection.sMainSection})) {
       section.name = item.oSection.sMainSection;
       sections.push({...section});
+      section.questionsLength += 1;
     }
 
     if (!_.find(subsections, {name: item.oSection.sSubSection})) {
@@ -37,13 +40,15 @@ export function parseQuestionnaire(questions) {
 
   });
   questionnaires.push({sections, subsections, questions});
+
   return questionnaires;
 }
 
 export function* loadSection() {
-  var data = parseQuestionnaire(GetTestData().oQuestionList),
+  var
+    data = parseQuestionnaire(GetTestData().oQuestionList),
     section = {};
-  //TODO: replace with props
+
   var sectionName = window.location.pathname.split('/').slice(-1)[0];
   yield delay(500);
   section.subsections = _.filter(data[0].subsections, {'sectionName': sectionName});

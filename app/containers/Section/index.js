@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import _ from 'lodash';
 
 import { createStructuredSelector } from 'reselect';
 
@@ -35,22 +36,26 @@ export class Section extends React.Component {
         <Link to={`/q/${params.id}`}>Up</Link>
         {currentSubsection &&
         <table>
-          <caption>{currentSubsection.name}</caption>
+            <caption>{currentSubsection.name} section has {section.questionsLength} questions. The questions are spread
+              over {section.subsections.length} subsections. There are 0 remarks and 0 questions are approved.
+              {_.filter(currentSubsection.questions, {answer: ''}).length} question(s) are unanswered in this section.
+            </caption>
+
           <tbody>
-            {currentSubsection.questions.map(function (q, index) {
-              return <tr key={index}>
-                <td>
-                  <div>{q.sQuestion}</div>
-                  <textarea rows="4"></textarea>
-                </td>
-              </tr>
-            })}
-            <tr>
+          {currentSubsection.questions.map(function (q, index) {
+            return <tr key={index}>
               <td>
-                <button onClick={this.saveAndPrev.bind(this)}>&larr; Prev</button>
-                <button onClick={this.saveAndNext.bind(this)}>Next &rarr;</button>
+                <div>{q.sQuestion}</div>
+                <textarea defaultValue={q.answer} rows="4"></textarea>
               </td>
             </tr>
+          })}
+          <tr>
+            <td>
+              <button onClick={this.saveAndPrev.bind(this)}>&larr; Prev</button>
+              <button onClick={this.saveAndNext.bind(this)}>Next &rarr;</button>
+            </td>
+          </tr>
           </tbody>
         </table>
         }

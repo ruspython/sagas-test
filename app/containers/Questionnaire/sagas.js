@@ -17,6 +17,8 @@ export function parseQuestionnaire(questions) {
     var
       section = {},
       subsection = {};
+    item.answer = ['answer', 'not an answer', ''][parseInt(Math.random() * 3)];
+
     if (!_.find(sections, {name: item.oSection.sMainSection})) {
       section.name = item.oSection.sMainSection;
       sections.push(section);
