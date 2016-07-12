@@ -29,33 +29,33 @@ export class Questionnaire extends React.Component {
 
   render() {
     const {questionnaire, params} = this.props;
-
+    const {lang} = this.state;
     return (
       <article>
         <Link to="/">Up</Link>
         {questionnaire ?
           <table>
             <tbody>
-              <tr>
-                <td>Questionnaire list</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  This questionnaire has {questionnaire.questions.length} questions. <br/>
-                  The questions are spread over {questionnaire.sections.length} sections
-                  and {questionnaire.subsections.length} sub sections.
-                </td>
-                <td></td>
-              </tr>
-              { questionnaire.sections.map(function (section, index) {
-                return (
-                  <tr key={index}>
-                    <td><Link to={`/q/${params.id}/sections/${section.name}`}>{section.name}</Link></td>
-                    <td></td>
-                  </tr>
-                )
-              }) }
+            <tr>
+              <td>Questionnaire list</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                This questionnaire has {questionnaire.questions.length} questions. <br/>
+                The questions are spread over {questionnaire.sections.length} sections
+                and {questionnaire.subsections.length} sub sections.
+              </td>
+              <td></td>
+            </tr>
+            { questionnaire.sections.map(function (section, index) {
+              return (
+                <tr key={index}>
+                  <td><Link to={`/q/${params.id}/sections/${section.name}`}>{section.name}</Link></td>
+                  <td></td>
+                </tr>
+              )
+            }) }
             </tbody>
           </table>
           : null

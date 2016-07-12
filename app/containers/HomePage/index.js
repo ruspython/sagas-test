@@ -17,12 +17,59 @@ import { loadQuestions, addQuestionnaire } from '../App/actions';
 import styles from './styles.css';
 
 export class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      lang: 'en'
+    }
+  }
   componentDidMount() {
+    var lang = this.getCookie('lang');
+    this.setState({lang});
     this.props.onPageLoad();
+  }
+
+
+  setLang(e) {
+    var lang = e.target.value;
+    this.setCookie('lang', lang, 360*24*60*60);
+    this.setState({lang});
+    location.reload();
+  }
+
+
+  setCookie(name, value, days) {
+    var expires;
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toGMTString();
+    }
+    else expires = "";
+    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+  }
+
+
+  getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
+
+  deleteCookie(name) {
+    this.set(name, "", -1);
   }
 
   render() {
     let mainContent = null;
+    const {lang} = this.state;
 
     if (this.props.questionnaires) {
       mainContent = (
@@ -87,6 +134,10 @@ export class HomePage extends React.Component {
 
     return (
       <article>
+        <select value={lang} onChange={this.setLang.bind(this)}>
+          <option value="en-US">En</option>
+          <option value="de">De</option>
+        </select>
         <div>
           <section className={styles.textSection}>
             {mainContent}
