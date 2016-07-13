@@ -29,7 +29,6 @@ export class Questionnaire extends React.Component {
 
   render() {
     const {questionnaire, params} = this.props;
-    const {lang} = this.state;
     return (
       <article>
         <Link to="/">Up</Link>
